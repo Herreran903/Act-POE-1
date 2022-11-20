@@ -221,6 +221,7 @@ public class PrestamoVista extends JFrame
     public void generarTablaAmortizacion(Object[][] datosFila, String[] datosNombre)
     {
         jtTablaAmortizacion = new JTable(datosFila, datosNombre);
+        jtTablaAmortizacion.setEnabled(false);
         jpTabla =  new JScrollPane(jtTablaAmortizacion);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
