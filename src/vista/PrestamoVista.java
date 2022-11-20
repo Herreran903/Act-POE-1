@@ -237,6 +237,7 @@ public class PrestamoVista extends JFrame
     public void generarTablaCuotaFija(Object[][] datosFila, String[] datosNombre)
     {
         jtTablaCuotaFija = new JTable(datosFila, datosNombre);
+        jtTablaCuotaFija.setEnabled(false);
         jpTabla1 =  new JScrollPane(jtTablaCuotaFija);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 6;
