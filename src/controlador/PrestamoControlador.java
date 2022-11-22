@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 import modelo.PrestamoModelo;
 import vista.PrestamoVista;
 
@@ -15,8 +16,8 @@ import vista.PrestamoVista;
  */
 public class PrestamoControlador 
 {
-    private PrestamoModelo modelo;
-    private PrestamoVista vista;
+    private final PrestamoModelo modelo;
+    private final PrestamoVista vista;
 
     public PrestamoControlador(PrestamoModelo auxModelo, PrestamoVista auxVista) 
     {
@@ -28,7 +29,6 @@ public class PrestamoControlador
         
         this.vista.addBtnCalcularListener(new CalcularListener());
         this.vista.addBtnNuevoListener(new CalcularListener());
-
     }
     
     
@@ -56,12 +56,16 @@ public class PrestamoControlador
                     modelo.generarDatosCuotaFija();
                     
                     String datosNombreAmortizacion[] = {"Mes", "Saldo", "Interes", "Cuota", "Abono", "Saldo Final"};
-                    vista.generarTablaAmortizacion(modelo.getDatosAmortizacion(), datosNombreAmortizacion);
+                    DefaultTableModel modelTabla = new DefaultTableModel(modelo.getDatosAmortizacion(), datosNombreAmortizacion); 
+                    vista.generarTablaAmortizacion(modelTabla);
+                    
                     String datosNombreCuotaFija[] = {"Monto", "Cuota", "Tasa", "Meses"};
-                    vista.generarTablaCuotaFija(modelo.getDatosCuotaFija(), datosNombreCuotaFija);
-                    vista.activarControles(false);
+                    DefaultTableModel modelTabla1 = new DefaultTableModel(modelo.getDatosCuotaFija(), datosNombreCuotaFija); 
+                    vista.generarTablaCuotaFija(modelTabla1);
+                    
                     vista.interesTotales(modelo.getInteresesTotales());
-
+                    
+                    vista.pagTabla();
                 } 
                 catch(NumberFormatException ex)
                 {
@@ -70,20 +74,8 @@ public class PrestamoControlador
            }
            if(e.getActionCommand().equalsIgnoreCase("NuevoPrestamo"))
            {
-                vista.activarControles(true);
-                vista.desactivarControles(false);
+                vista.pagIngresoDatos();
            }
-           
-           /*if(e.getActionCommand().equalsIgnoreCase("nuevo")){
-               vista.activarControles(true);
-           }
-           
-           if(e.getActionCommand().equalsIgnoreCase("cancelar")){
-                vista.activarControles(false);
-           }*/
-           
-        }
-        
+        } 
     }
-    
 }

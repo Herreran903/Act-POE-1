@@ -6,19 +6,13 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,9 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -40,8 +32,8 @@ public class PrestamoVista extends JFrame
 {
     private Color rojoClaro;
     private Color blancoClaro;
-    final static String TablaPanel = "CardTable";
-    final static String IngresoDataPanel = "CardData";
+    final static String tablaPanel = "CardTable";
+    final static String ingresoDataPanel = "CardData";
     GridBagConstraints gbc = new GridBagConstraints();
     
     private JPanel jpCentral;
@@ -181,7 +173,40 @@ public class PrestamoVista extends JFrame
         jpTabla.setLayout(new GridBagLayout());
         jpTabla.setBackground(blancoClaro);
         
+        jspTabla =  new JScrollPane(jtTablaAmortizacion);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 3;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        jpTabla.add(jspTabla, gbc);
+        
+        jspTabla1 =  new JScrollPane(jtTablaCuotaFija);
+        gbc.gridx = 3;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        jpTabla.add(jspTabla1, gbc);
+
         jtTablaAmortizacion = new JTable();
+        jtTablaAmortizacion.getTableHeader().setFont(new Font("Arial", 1, 11));
+        jtTablaAmortizacion.getTableHeader().setReorderingAllowed(false);
+        jtTablaAmortizacion.getTableHeader().setResizingAllowed(false);
+        jtTablaAmortizacion.setFont(new Font("Arial", 1, 10));
+        jtTablaAmortizacion.setEnabled(false);  
+        
+        jtTablaCuotaFija = new JTable();
+        jtTablaCuotaFija.getTableHeader().setFont(new Font("Arial", 1, 11));
+        jtTablaCuotaFija.getTableHeader().setReorderingAllowed(false);
+        jtTablaCuotaFija.getTableHeader().setResizingAllowed(false);
+        jtTablaCuotaFija.setFont(new Font("Arial", 1, 10));
+        jtTablaCuotaFija.setBackground(blancoClaro);
+        jtTablaCuotaFija.setEnabled(false);
         
         lblTablas = new JLabel("TABLAS", SwingConstants.CENTER);
         lblTablas.setFont(new Font("Arial", 1, 40));
@@ -241,11 +266,20 @@ public class PrestamoVista extends JFrame
         jpTabla.add(btnNuevoPrestamo, gbc);
         
         lblInteresesTotales = new JLabel();
+        lblInteresesTotales.setFont(new Font("Arial", 1, 15));
+        gbc.gridx = 3;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+        gbc.fill = GridBagConstraints.NONE;
+        jpTabla.add(lblInteresesTotales, gbc);
         
         //Adicion de los Jpanel a jpCentral y JFrame
         
-        jpCentral.add(jpIngresoData, IngresoDataPanel);
-        jpCentral.add(jpTabla, TablaPanel);
+        jpCentral.add(jpIngresoData, ingresoDataPanel);
+        jpCentral.add(jpTabla, tablaPanel);
         
         this.getContentPane().add(jpSuperior, BorderLayout.NORTH);
         this.getContentPane().add(jpInferior, BorderLayout.SOUTH);
@@ -279,84 +313,40 @@ public class PrestamoVista extends JFrame
         JOptionPane.showMessageDialog(this, erroMessage);
     }
     
-    public void activarControles(boolean estado)
+    public void pagTabla()
     {
         CardLayout a = (CardLayout)jpCentral.getLayout();
-        a.show(jpCentral, TablaPanel);
+        a.show(jpCentral, tablaPanel);
         
     }
     
-    public void desactivarControles(boolean estado)
+    public void pagIngresoDatos()
     {
+        setTitle("PRESTAMO");
+        txfMontoPrestamo.setText("");
+        txfCantidadMeses.setText("");
         CardLayout a = (CardLayout)jpCentral.getLayout();
-        a.show(jpCentral, IngresoDataPanel);
+        a.show(jpCentral, ingresoDataPanel);
     }
     
-    public void generarTablaAmortizacion(Object[][] datosFila, String[] datosNombre)
+    public void generarTablaAmortizacion(DefaultTableModel data)
     {
-        DefaultTableModel modelTabla = new DefaultTableModel(datosFila,datosNombre);
-        jtTablaAmortizacion.setModel(modelTabla);
-        repaint();
-        jtTablaAmortizacion.getTableHeader().setFont(new Font("Arial", 1, 11));
-        jtTablaAmortizacion.getTableHeader().setReorderingAllowed(false);
-        jtTablaAmortizacion.getTableHeader().setResizingAllowed(false);
-        jtTablaAmortizacion.setFont(new Font("Arial", 1, 10));
-        jtTablaAmortizacion.setEnabled(false);
+        setTitle("TABLAS");
+        jtTablaAmortizacion.setModel(data);
         jtTablaAmortizacion.setPreferredScrollableViewportSize(new Dimension(jtTablaAmortizacion.getPreferredSize().width, jtTablaAmortizacion.getRowHeight() * 12));
-        jspTabla =  new JScrollPane(jtTablaAmortizacion);
-        jspTabla.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
-        
-        
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 3;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.BOTH;
-        jpTabla.add(jspTabla, gbc);
-
+        jspTabla.getViewport().add(jtTablaAmortizacion);   
     }
     
-    public void generarTablaCuotaFija(Object[][] datosFila, String[] datosNombre)
+    public void generarTablaCuotaFija(DefaultTableModel data)
     {
-        jtTablaCuotaFija = new JTable(datosFila, datosNombre);
-        jtTablaCuotaFija.getTableHeader().setFont(new Font("Arial", 1, 11));
-        jtTablaCuotaFija.getTableHeader().setReorderingAllowed(false);
-        jtTablaCuotaFija.getTableHeader().setResizingAllowed(false);
-        jtTablaCuotaFija.setFont(new Font("Arial", 1, 10));
-        jtTablaCuotaFija.setBackground(blancoClaro);
-        jtTablaCuotaFija.setEnabled(false);
+        jtTablaCuotaFija.setModel(data);
         jtTablaCuotaFija.setPreferredScrollableViewportSize(new Dimension(jtTablaCuotaFija.getPreferredSize().width, jtTablaCuotaFija.getRowHeight() * 1));
-        
-        jspTabla1 =  new JScrollPane(jtTablaCuotaFija);
-        jspTabla1.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
-        
-        
-        
-        // gbc = new GridBagConstraints();
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        jpTabla.add(jspTabla1, gbc);
+        jspTabla1.getViewport().add(jtTablaCuotaFija);       
     }
     
     public void interesTotales(double interesesTotales)
     {   
         lblInteresesTotales.setText("INTERESES TOTALES: "+interesesTotales);
-        lblInteresesTotales.setFont(new Font("Arial", 1, 15));
-        gbc.gridx = 3;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.NONE;
-        jpTabla.add(lblInteresesTotales, gbc);
     }
            
 }
