@@ -222,8 +222,16 @@ public class PrestamoVista extends JFrame
     public void generarTablaAmortizacion(Object[][] datosFila, String[] datosNombre)
     {
         jtTablaAmortizacion = new JTable(datosFila, datosNombre);
+        jtTablaAmortizacion.getTableHeader().setFont(new Font("Arial", 1, 11));
+        jtTablaAmortizacion.getTableHeader().setReorderingAllowed(false);
+        jtTablaAmortizacion.getTableHeader().setResizingAllowed(false);
+        jtTablaAmortizacion.setFont(new Font("Arial", 1, 10));
         jtTablaAmortizacion.setEnabled(false);
+        jtTablaAmortizacion.setPreferredScrollableViewportSize(new Dimension(jtTablaAmortizacion.getPreferredSize().width, jtTablaAmortizacion.getRowHeight() * 12));
+        
         jpTabla =  new JScrollPane(jtTablaAmortizacion);
+        jpTabla.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -231,7 +239,7 @@ public class PrestamoVista extends JFrame
         gbc.gridheight = 1;
         gbc.weightx = 0.5;
         gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         jpCentral.add(jpTabla, gbc);
     }
     
