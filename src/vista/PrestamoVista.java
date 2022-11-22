@@ -228,7 +228,7 @@ public class PrestamoVista extends JFrame
         jtTablaAmortizacion.setFont(new Font("Arial", 1, 10));
         jtTablaAmortizacion.setEnabled(false);
         jtTablaAmortizacion.setPreferredScrollableViewportSize(new Dimension(jtTablaAmortizacion.getPreferredSize().width, jtTablaAmortizacion.getRowHeight() * 12));
-        
+
         jpTabla =  new JScrollPane(jtTablaAmortizacion);
         jpTabla.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
         
