@@ -58,7 +58,7 @@ public class PrestamoControlador
                     vista.activarControles(false);
                     String datosNombreAmortizacion[] = {"Mes", "Saldo", "Interes", "Cuota", "Abono", "Saldo Final"};
                     vista.generarTablaAmortizacion(modelo.getDatosAmortizacion(), datosNombreAmortizacion);
-                    String datosNombreCuotaFija[] = {"Monto", "Cuota", "Tasa", "Periodo en meses"};
+                    String datosNombreCuotaFija[] = {"Monto", "Cuota", "Tasa", "Meses"};
                     vista.generarTablaCuotaFija(modelo.getDatosCuotaFija(), datosNombreCuotaFija);
                     vista.interesTotales(modelo.getInteresesTotales());
 
