@@ -14,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.print.PrinterException;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -221,32 +222,49 @@ public class PrestamoVista extends JFrame
     public void generarTablaAmortizacion(Object[][] datosFila, String[] datosNombre)
     {
         jtTablaAmortizacion = new JTable(datosFila, datosNombre);
+        jtTablaAmortizacion.getTableHeader().setFont(new Font("Arial", 1, 11));
+        jtTablaAmortizacion.getTableHeader().setReorderingAllowed(false);
+        jtTablaAmortizacion.getTableHeader().setResizingAllowed(false);
+        jtTablaAmortizacion.setFont(new Font("Arial", 1, 10));
         jtTablaAmortizacion.setEnabled(false);
+        jtTablaAmortizacion.setPreferredScrollableViewportSize(new Dimension(jtTablaAmortizacion.getPreferredSize().width, jtTablaAmortizacion.getRowHeight() * 12));
+
         jpTabla =  new JScrollPane(jtTablaAmortizacion);
+        jpTabla.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 6;
+        gbc.gridwidth = 4;
         gbc.gridheight = 1;
         gbc.weightx = 0.5;
         gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         jpCentral.add(jpTabla, gbc);
     }
     
     public void generarTablaCuotaFija(Object[][] datosFila, String[] datosNombre)
     {
         jtTablaCuotaFija = new JTable(datosFila, datosNombre);
+        jtTablaCuotaFija.getTableHeader().setFont(new Font("Arial", 1, 11));
+        jtTablaCuotaFija.getTableHeader().setReorderingAllowed(false);
+        jtTablaCuotaFija.getTableHeader().setResizingAllowed(false);
+        jtTablaCuotaFija.setFont(new Font("Arial", 1, 10));
+        jtTablaCuotaFija.setBackground(blancoClaro);
         jtTablaCuotaFija.setEnabled(false);
+        jtTablaCuotaFija.setPreferredScrollableViewportSize(new Dimension(jtTablaCuotaFija.getPreferredSize().width, jtTablaCuotaFija.getRowHeight() * 1));
+        
         jpTabla1 =  new JScrollPane(jtTablaCuotaFija);
+        jpTabla1.setBorder(BorderFactory.createLineBorder(rojoClaro, 5));
+        
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 6;
+        gbc.gridx = 5;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.5;
         gbc.weighty = 0.5;
-        gbc.fill = GridBagConstraints.NONE;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         jpCentral.add(jpTabla1, gbc);
     }
     
