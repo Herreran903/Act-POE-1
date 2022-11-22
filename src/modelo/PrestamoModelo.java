@@ -146,6 +146,6 @@ public class PrestamoModelo
     
     public double getInteresesTotales()
     {
-        return interesesTotales;
+        return Math.round(interesesTotales * 1000) /1000;
     }
 }
