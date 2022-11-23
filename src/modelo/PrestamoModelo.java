@@ -23,7 +23,6 @@ public class PrestamoModelo
         this.montoPrestamo = 0;
         this.cantidadMeses = 0;
         this.interesesTotales = 0;
-        aaaa
     }
     
     public PrestamoModelo(int auxMontoPrestamo, int auxCantidadMeses)
