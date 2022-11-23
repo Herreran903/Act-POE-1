@@ -327,6 +327,7 @@ public class PrestamoVista extends JFrame
         txfCantidadMeses.setText("");
         CardLayout a = (CardLayout)jpCentral.getLayout();
         a.show(jpCentral, ingresoDataPanel);
+        jtTablaAmortizacion = null;
     }
     
     public void generarTablaAmortizacion(DefaultTableModel data)
@@ -334,7 +335,7 @@ public class PrestamoVista extends JFrame
         setTitle("TABLAS");
         jtTablaAmortizacion.setModel(data);
         jtTablaAmortizacion.setPreferredScrollableViewportSize(new Dimension(jtTablaAmortizacion.getPreferredSize().width, jtTablaAmortizacion.getRowHeight() * 12));
-        jspTabla.getViewport().add(jtTablaAmortizacion);   
+        jspTabla.getViewport().add(jtTablaAmortizacion);
     }
     
     public void generarTablaCuotaFija(DefaultTableModel data)
