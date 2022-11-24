@@ -95,7 +95,7 @@ public class PrestamoVista extends JFrame
         
         jpIngresoData = new JPanel();
         jpIngresoData.setLayout(new GridBagLayout());
-        jpIngresoData.setBackground(blancoClaro);
+        jpIngresoData.setBackground(Color.white);
         
         gbc.gridx = 0;
         gbc.gridy = 0;
