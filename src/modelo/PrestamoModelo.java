@@ -6,7 +6,7 @@ package modelo;
 
 /**
  *
- * @author Nicolas Herrera
+ * @author Nicolas Herrera M.
  */
 public class PrestamoModelo 
 {
