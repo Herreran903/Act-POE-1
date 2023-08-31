@@ -140,7 +140,7 @@ public class PrestamoModelo
         datosCuotaFija = new Object[1][4];
         datosCuotaFija[0][0] = Math.round(montoPrestamo);
         datosCuotaFija[0][1] = Math.round(cuota);
-        datosCuotaFija[0][2]  tasaInteres;
+        datosCuotaFija[0][2] = tasaInteres;
         datosCuotaFija[0][3] = Math.round(cantidadMeses);
     }
     
